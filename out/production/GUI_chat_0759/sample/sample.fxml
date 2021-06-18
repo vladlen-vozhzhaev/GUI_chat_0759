@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="center" prefHeight="275" prefWidth="300" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <TextArea prefHeight="250" prefWidth="300" />
+      <HBox prefHeight="25" prefWidth="300">
+         <children>
+            <TextField prefWidth="225" />
+            <Button mnemonicParsing="false" prefWidth="75" style="-fx-background-color: black;" text="Отправить" textAlignment="CENTER" textFill="RED" underline="true" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
