@@ -2,15 +2,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="center" prefHeight="275" prefWidth="300" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <children>
-      <TextArea prefHeight="250" prefWidth="300" />
-      <HBox prefHeight="25" prefWidth="300">
-         <children>
-            <TextField prefWidth="225" />
-            <Button mnemonicParsing="false" prefWidth="75" style="-fx-background-color: black;" text="Отправить" textAlignment="CENTER" textFill="RED" underline="true" />
-         </children>
-      </HBox>
-   </children>
-</VBox>
+<HBox prefHeight="300" prefWidth="400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <TextArea fx:id="userListTextArea" editable="false" prefHeight="300" prefWidth="125" style="-fx-border-width: 10px; -fx-background-color: black;" />
+   <VBox alignment="center" prefHeight="300" prefWidth="275">
+      <children>
+         <TextArea fx:id="textArea" editable="false" prefHeight="250" prefWidth="400">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </TextArea>
+         <HBox prefHeight="25" prefWidth="300">
+            <children>
+               <TextField fx:id="textField" onAction="#send" prefWidth="225" />
+               <Button mnemonicParsing="false" onAction="#send" prefWidth="75" style="-fx-background-color: black;" text="Отправить" textAlignment="CENTER" textFill="RED" underline="true" />
+            </children>
+         </HBox>
+         <Button fx:id="connectBtn" onAction="#connect" prefHeight="25" prefWidth="Infinity" text="Подключиться" />
+      </children>
+   </VBox>
+</HBox>

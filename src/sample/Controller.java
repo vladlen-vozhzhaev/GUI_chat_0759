@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class Controller {
@@ -18,6 +19,8 @@ public class Controller {
     TextArea textArea;
     @FXML
     Button connectBtn;
+    @FXML
+    TextArea userListTextArea;
     @FXML
     private void send(){
         try {
@@ -36,16 +39,22 @@ public class Controller {
             connectBtn.setDisable(true);
             Socket socket = new Socket("localhost",8188); // Создаём сокет, для подключения к серверу
             out = new DataOutputStream(socket.getOutputStream());
-            DataInputStream in = new DataInputStream(socket.getInputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             Thread thread = new Thread(new Runnable() { // Создаём поток, для приёма сообщений от сервера
                 @Override
                 public void run() {
                     String response = null;
                     while (true){
                         try {
-                            response = in.readUTF(); // Принимаем сообщение от сервера
-                            textArea.appendText(response+"\n"); //Печатаем на консоль принятое сообщение от сервера
-                        } catch (IOException e) {
+                            response = in.readObject().toString(); // Принимаем сообщение от сервера
+                            if(response.startsWith("**userList**")){
+                                String[] usersName = response.split("//"); //**userList**//user1//user2//user3
+                                userListTextArea.setText("");
+                                for (String name: usersName){
+                                    userListTextArea.appendText(name+"\n");
+                                }
+                            }else textArea.appendText(response+"\n"); //Печатаем на консоль принятое сообщение от сервера
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
